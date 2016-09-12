@@ -4,6 +4,12 @@ var request = require('request');
 var cleverbot = require("cleverbot.io");
 var app = express();
 var bot = new cleverbot("JGjG1bPciITXCB0X", "HYhY8A7oB3u5yGG427XCgIAJtToqJ2jV");
+bot.setNick("awesomesmartbot");
+bot.create(function (err, session) {
+  if (err) {
+  	console.log('Failed to create cleverbot session: ', err);
+  }
+});
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
