@@ -165,7 +165,7 @@ function receivedMessage(event) {
       default:
         bot.ask(messageText, function (err, response) {
         	if (err) {
-        		sendTextMessage(senderID, err);
+        		sendTextMessage(senderID, 'hmmm...');
         	} else {
         		sendTextMessage(senderID, response);
         	}
