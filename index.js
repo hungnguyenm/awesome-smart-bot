@@ -122,9 +122,51 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-  	bot.ask(messageText, function (err, response) {
-	  sendTextMessage(senderID, response);
-	});
+  	switch (messageText) {
+      case 'image':
+        break;
+
+      case 'gif':
+        break;
+
+      case 'audio':
+        break;
+
+      case 'video':
+        break;
+
+      case 'file':
+        break;
+
+      case 'button':
+        break;
+
+      case 'generic':
+        break;
+
+      case 'receipt':
+        break;
+
+      case 'quick reply':
+        break;        
+
+      case 'read receipt':
+        break;        
+
+      case 'typing on':
+        break;        
+
+      case 'typing off':
+        break;        
+
+      case 'account linking':
+        break;
+
+      default:
+        bot.ask(messageText, function (err, response) {
+		  sendTextMessage(senderID, response);
+		});
+    }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "I don't want an attachment :(");
   }
