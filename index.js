@@ -4,12 +4,6 @@ var request = require('request');
 var cleverbot = require("cleverbot.io");
 var app = express();
 var bot = new cleverbot("JGjG1bPciITXCB0X", "HYhY8A7oB3u5yGG427XCgIAJtToqJ2jV");
-bot.setNick("awesomesmartbot");
-bot.create(function (err, session) {
-  if (err) {
-  	console.log('Failed to create cleverbot session: ', err);
-  }
-});
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -114,15 +108,8 @@ function receivedMessage(event) {
   var quickReply = message.quick_reply;
 
   if (isEcho) {
-    // Just logging message echoes to console
-    console.log("Received echo for message %s and app %d with metadata %s", 
-      messageId, appId, metadata);
     return;
   } else if (quickReply) {
-    var quickReplyPayload = quickReply.payload;
-    console.log("Quick reply for message %s with payload %s",
-      messageId, quickReplyPayload);
-
     sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
@@ -169,16 +156,24 @@ function receivedMessage(event) {
         break;
 
       default:
-        bot.ask(messageText, function (err, response) {
-        	if (err) {
-        		sendTextMessage(senderID, 'hmmm...');
-        	} else {
-        		sendTextMessage(senderID, response);
-        	}
-		});
+        bot.create(function (err, session) {
+          if (err) {
+            console.log('Failed to create cleverbot session for user %d: ', senderID, err);
+            sendTextMessage(senderID, 'hmmm...');
+          } else {
+            bot.ask(messageText, function (err, response) {
+              if (err) {
+                console.log('Failed to get cleverbot answer: ', err);
+                sendTextMessage(senderID, 'hmmm...');
+              } else {
+                sendTextMessage(senderID, response);
+              }
+            });
+          }
+        });
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "I don't want an attachment :(");
+    sendTextMessage(senderID, "Ask me more questions!");
   }
 }
 
