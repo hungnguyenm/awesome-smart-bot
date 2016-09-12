@@ -31,6 +31,9 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
         	bot.ask(event.message.text, function (err, response) {
 			  sendMessage(event.sender.id, {text: response});
+			  console.log('ID: ', event.sender.id);
+			  console.log('Text: ', event.message.text);
+			  console.log('Resp: ', response);
 			});
         }
     }
