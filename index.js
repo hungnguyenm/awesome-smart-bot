@@ -164,7 +164,11 @@ function receivedMessage(event) {
 
       default:
         bot.ask(messageText, function (err, response) {
-		  sendTextMessage(senderID, response);
+        	if (err) {
+        		sendTextMessage(senderID, err);
+        	} else {
+        		sendTextMessage(senderID, response);
+        	}
 		});
     }
   } else if (messageAttachments) {
