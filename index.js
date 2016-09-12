@@ -156,19 +156,13 @@ function receivedMessage(event) {
         break;
 
       default:
-        bot.create(function (err, session) {
+        bot.setNick(senderID);
+        bot.ask(messageText, function (err, response) {
           if (err) {
-            console.log('Failed to create cleverbot session for user %d: ', senderID, err);
+            console.log('Failed to get cleverbot answer');
             sendTextMessage(senderID, 'hmmm...');
           } else {
-            bot.ask(messageText, function (err, response) {
-              if (err) {
-                console.log('Failed to get cleverbot answer: ', err);
-                sendTextMessage(senderID, 'hmmm...');
-              } else {
-                sendTextMessage(senderID, response);
-              }
-            });
+            sendTextMessage(senderID, response);
           }
         });
     }
