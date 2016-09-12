@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 4513));
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 // Server frontpage
 app.get('/', function (req, res) {
     res.send('AMA Bot is running...');
