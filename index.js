@@ -1,7 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
+var cleverbot = require("cleverbot.io");
 var app = express();
+var bot = new cleverbot("JGjG1bPciITXCB0X", "HYhY8A7oB3u5yGG427XCgIAJtToqJ2jV");
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -27,7 +29,9 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+        	bot.ask(event.message.text, function (err, response) {
+			  sendMessage(event.sender.id, {text: response});
+			});
         }
     }
     res.sendStatus(200);
