@@ -1,0 +1,16 @@
+{
+  "name": "awesome-smart-bot",
+  "version": "1.0.0",
+  "description": "AMA Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Hung Nguyen",
+  "license": "GPLv3",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  }
+}
