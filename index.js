@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.listen((process.env.PORT || 4513));
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+bot.setNick("minhhung");
 
 // Server frontpage
 app.get('/', function (req, res) {
@@ -156,7 +157,6 @@ function receivedMessage(event) {
         break;
 
       default:
-        bot.setNick(senderID);
         bot.ask(messageText, function (err, response) {
           if (err) {
             console.log('Failed to get cleverbot answer');
