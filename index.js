@@ -123,8 +123,8 @@ function receivedMessage(event) {
 
   if (messageText) {
   	bot.ask(messageText, function (err, response) {
-			  sendTextMessage(senderID, {text: response});
-			});
+	  sendTextMessage(senderID, response);
+	});
   } else if (messageAttachments) {
     sendTextMessage(senderID, "I don't want an attachment :(");
   }
